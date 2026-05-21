@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 100,
     height: 55,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
     flexDirection: "row",
   },
   textLabel: {

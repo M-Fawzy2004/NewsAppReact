@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <View style={styles.containerHeader}>
       <View style={styles.textContainer}>
-        <Ionicons name="person-circle" size={25} color="#000" />
+        <Ionicons name="person-circle" size={30} color="#000" />
       </View>
       <View style={styles.textHeader}>
         <Text style={styles.textLabel}>News App</Text>
