@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,20 +7,55 @@ import {
   Dimensions,
 } from "react-native";
 import styles from "./Styles";
-import { newsData } from "./newsData";
+import { Articles } from "./TypeData";
+import { LinearGradient } from "expo-linear-gradient";
+import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
+import { getTopNews } from "../../Services/TopNewsApis/TopNews";
 
 const MainNews = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [topNews, setTopNews] = useState<Articles[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const { width } = Dimensions.get("window");
 
-  function getNews(item: { id?: number; image: any; title: any }) {
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  async function fetchNews() {
+    setLoading(true);
+    const news = await getTopNews();
+    setTopNews(news);
+    setLoading(false);
+  }
+
+  function renderShimmer() {
+    return (
+      <View style={{ flexDirection: "row" }}>
+        {[1, 2, 3].map((item) => (
+          <ShimmerPlaceHolder
+            key={item}
+            LinearGradient={LinearGradient}
+            style={styles.containerShimmer}
+          />
+        ))}
+      </View>
+    );
+  }
+
+  function getNews(item: Articles) {
     return (
       <ImageBackground
-        source={{ uri: item.image }}
+        source={{ uri: item.urlToImage }}
         resizeMode="cover"
         style={styles.container}
       >
+        <View style={styles.smallContainer}>
+          <Text style={styles.textSmallContainer}>
+            {item.author || "Unknown Author"}
+          </Text>
+        </View>
         <View style={styles.mediumContainer}>
           <Text style={styles.textMediumContainer}>{item.title}</Text>
         </View>
@@ -30,32 +65,40 @@ const MainNews = () => {
 
   return (
     <View>
-      <FlatList
-        data={newsData}
-        renderItem={({ item }) => getNews(item)}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        onScroll={(e) => {
-          const offset = e.nativeEvent.contentOffset.x;
-          const index = Math.round(offset / width);
-          setActiveIndex(index);
-        }}
-        scrollEventThrottle={16}
-      />
-      <View style={styles.indicatorContainer}>
-        {newsData.map((_, index) => (
-          <View
-            key={index}
-            style={
-              activeIndex === index
-                ? styles.activeIndicator
-                : styles.notActiveindicator
-            }
+      {loading ? (
+        renderShimmer()
+      ) : (
+        <>
+          <FlatList
+            data={topNews}
+            renderItem={({ item }) => getNews(item)}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => item.title + index}
+            onScroll={(e) => {
+              const offset = e.nativeEvent.contentOffset.x;
+              const index = Math.round(offset / width);
+
+              setActiveIndex(index);
+            }}
+            scrollEventThrottle={16}
           />
-        ))}
-      </View>
+
+          <View style={styles.indicatorContainer}>
+            {topNews.map((_, index) => (
+              <View
+                key={index}
+                style={
+                  activeIndex === index
+                    ? styles.activeIndicator
+                    : styles.notActiveindicator
+                }
+              />
+            ))}
+          </View>
+        </>
+      )}
     </View>
   );
 };

@@ -11,6 +11,14 @@ const styles = StyleSheet.create({
     height: 250,
     width: width - 20,
   },
+  containerShimmer: {
+    marginVertical: 20,
+    marginHorizontal: 10,
+    borderRadius: 30,
+    overflow: "hidden",
+    height: 250,
+    width: width - 20,
+  },
   mediumContainer: {
     backgroundColor: "#eaeaeaa8",
     borderRadius: 30,
@@ -22,6 +30,19 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 15,
     fontWeight: 400,
+    margin: 10,
+  },
+  smallContainer: {
+    backgroundColor: "#eaeaeaa8",
+    borderRadius: 30,
+    margin: 10,
+    padding: 7,
+    alignSelf: "flex-start",
+  },
+  textSmallContainer: {
+    color: "black",
+    fontSize: 13,
+    fontWeight: "400",
     margin: 10,
   },
   indicatorContainer: {

@@ -2,13 +2,15 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header/Header";
 import MainNews from "../../components/MainNews/MainNews";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const HomeScreen = () => {
   return (
     <SafeAreaView>
-      <Header />
-      <MainNews />
+      <View>
+        <Header />
+        <MainNews />
+      </View>
     </SafeAreaView>
   );
 };
