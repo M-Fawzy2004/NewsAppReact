@@ -19,10 +19,6 @@ const MainNews = () => {
 
   const { width } = Dimensions.get("window");
 
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
   async function fetchNews() {
     setLoading(true);
     const news = await getTopNews();
@@ -30,7 +26,11 @@ const MainNews = () => {
     setLoading(false);
   }
 
-  function renderShimmer() {
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  function _renderShimmer() {
     return (
       <View style={{ flexDirection: "row" }}>
         {[1, 2, 3].map((item) => (
@@ -44,7 +44,7 @@ const MainNews = () => {
     );
   }
 
-  function getNews(item: Articles) {
+  function mainNewsCard(item: Articles) {
     return (
       <ImageBackground
         source={{ uri: item.urlToImage }}
@@ -66,12 +66,12 @@ const MainNews = () => {
   return (
     <View>
       {loading ? (
-        renderShimmer()
+        _renderShimmer()
       ) : (
         <>
           <FlatList
             data={topNews}
-            renderItem={({ item }) => getNews(item)}
+            renderItem={({ item }) => mainNewsCard(item)}
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}

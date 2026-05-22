@@ -4,9 +4,9 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
     marginHorizontal: 10,
-    borderRadius: 30,
+    marginBottom: 20,
+    borderRadius: 16,
     overflow: "hidden",
     height: 250,
     width: width - 20,
@@ -14,14 +14,14 @@ const styles = StyleSheet.create({
   containerShimmer: {
     marginVertical: 20,
     marginHorizontal: 10,
-    borderRadius: 30,
+    borderRadius: 16,
     overflow: "hidden",
     height: 250,
     width: width - 20,
   },
   mediumContainer: {
     backgroundColor: "#eaeaeaa8",
-    borderRadius: 30,
+    borderRadius: 16,
     margin: 10,
     padding: 7,
     marginTop: "auto",
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   smallContainer: {
     backgroundColor: "#eaeaeaa8",
-    borderRadius: 30,
+    borderRadius: 16,
     margin: 10,
     padding: 7,
     alignSelf: "flex-start",

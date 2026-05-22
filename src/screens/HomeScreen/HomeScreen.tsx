@@ -2,15 +2,24 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header/Header";
 import MainNews from "../../components/MainNews/MainNews";
-import { StyleSheet, View } from "react-native";
+import { View, FlatList } from "react-native";
+import TopNews from "../../components/TopNews/TopNews";
 
 const HomeScreen = () => {
   return (
     <SafeAreaView>
       <View>
         <Header />
-        <MainNews />
       </View>
+      <FlatList
+        data={[1]}
+        renderItem={() => (
+          <View>
+            <MainNews />
+            <TopNews />
+          </View>
+        )}
+      />
     </SafeAreaView>
   );
 };

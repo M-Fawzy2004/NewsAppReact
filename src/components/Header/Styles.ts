@@ -6,13 +6,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   textHeader: {
     backgroundColor: "#eaeaea",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 100,
-    height: 55,
+    height: 45,
     paddingHorizontal: 40,
     flexDirection: "row",
   },
@@ -26,8 +27,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 100,
-    height: 55,
-    width: 55,
+    height: 45,
+    width: 45,
   },
 });
 
