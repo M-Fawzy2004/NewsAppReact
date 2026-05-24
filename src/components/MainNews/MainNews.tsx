@@ -21,7 +21,7 @@ const MainNews = () => {
 
   async function fetchNews() {
     setLoading(true);
-    const news = await getTopNews();
+    const news = await getTopNews(1,10);
     setTopNews(news);
     setLoading(false);
   }

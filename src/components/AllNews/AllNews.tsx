@@ -1,13 +1,13 @@
 import { View, Text, ImageBackground, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import styles from "./Styles";
-import { getTopNews } from "../../Services/TopNewsApis/TopNews";
-import { TypeTopNews } from "../TopNews/TypeTopNews";
+import { TypeAllNews } from "./TypeAllNews";
 import { RenderShimmer } from "./RanderShimmer";
+import { getAllNews } from "../../Services/AllNews/AllNews";
 
-export default function TopNews() {
+export default function AllNews() {
   const [loading, setLoading] = useState(true);
-  const [topNews, setTopNews] = useState<TypeTopNews[]>([]);
+  const [topNews, setTopNews] = useState<TypeAllNews[]>([]);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
 
@@ -15,7 +15,7 @@ export default function TopNews() {
     if (loadingMore) return;
     setLoadingMore(true);
     const nextPage = page + 1;
-    const newData = await getTopNews(nextPage, 5);
+    const newData = await getAllNews(nextPage);
     setTopNews((prev) => [...prev, ...newData]);
     setPage(nextPage);
     setLoadingMore(false);
@@ -26,19 +26,19 @@ export default function TopNews() {
   }, []);
 
   function shuffleArray(array: any[]) {
-    return [...array].sort(() => Math.random() - 0.9);
+    return [...array].sort(() => Math.random() - 0.5);
   }
 
   const fetchData = async () => {
     setLoading(true);
-    const data = await getTopNews(1, 5);
+    const data = await getAllNews(page);
     const shuffled = shuffleArray(data);
     setTopNews(shuffled);
     setPage(1);
     setLoading(false);
   };
 
-  function topNewsCard(item: TypeTopNews) {
+  function topNewsCard(item: TypeAllNews) {
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -59,7 +59,13 @@ export default function TopNews() {
             {item.description}
           </Text>
           <View style={styles.containerAuthor}>
-            <Text style={styles.authorNews}>{item.author}</Text>
+            <Text
+              style={styles.authorNews}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.author}
+            </Text>
           </View>
         </View>
       </View>
@@ -69,7 +75,7 @@ export default function TopNews() {
   return (
     <View>
       <View style={styles.containerTopNewsTitle}>
-        <Text style={styles.topNewsTitle}>TopNews</Text>
+        <Text style={styles.topNewsTitle}>All News</Text>
       </View>
 
       {loading ? (

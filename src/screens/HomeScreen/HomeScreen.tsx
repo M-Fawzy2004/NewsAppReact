@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Header/Header";
 import MainNews from "../../components/MainNews/MainNews";
 import { View, FlatList } from "react-native";
-import TopNews from "../../components/TopNews/TopNews";
+import AllNews from "../../components/AllNews/AllNews";
 
 const HomeScreen = () => {
   return (
@@ -16,7 +16,7 @@ const HomeScreen = () => {
         renderItem={() => (
           <View>
             <MainNews />
-            <TopNews />
+            <AllNews />
           </View>
         )}
       />

@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   authorNews: {
     padding: 10,
     fontSize: 14,
+    width: 250,
     color: "#ffffff",
   },
   containerAuthor: {
