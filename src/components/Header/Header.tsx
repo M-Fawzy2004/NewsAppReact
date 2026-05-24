@@ -11,7 +11,7 @@ const Header = () => {
       </View>
       <View style={styles.textHeader}>
         <Text style={styles.textLabel}>News App</Text>
-      </View>{" "}
+      </View>
       <View style={styles.textContainer}>
         <Ionicons name="notifications-outline" size={25} color="#000" />
       </View>

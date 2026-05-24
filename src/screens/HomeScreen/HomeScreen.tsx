@@ -11,17 +11,23 @@ const HomeScreen = () => {
       <View>
         <Header />
       </View>
-      <FlatList
-        data={[1]}
-        renderItem={() => (
-          <View>
-            <MainNews />
-            <AllNews />
-          </View>
-        )}
-      />
+      {listHomeScreen()}
     </SafeAreaView>
   );
 };
 
 export default HomeScreen;
+
+function listHomeScreen() {
+  return (
+    <FlatList
+      data={[1]}
+      renderItem={() => (
+        <View>
+          <MainNews />
+          <AllNews />
+        </View>
+      )}
+    />
+  );
+}

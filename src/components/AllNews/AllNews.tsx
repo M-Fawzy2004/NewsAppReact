@@ -1,23 +1,44 @@
-import { View, Text, ImageBackground, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import styles from "./Styles";
 import { TypeAllNews } from "./TypeAllNews";
 import { RenderShimmer } from "./RanderShimmer";
 import { getAllNews } from "../../Services/AllNews/AllNews";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import ScreenNums from "../../navigation/ScreenNums";
 
 export default function AllNews() {
   const [loading, setLoading] = useState(true);
   const [topNews, setTopNews] = useState<TypeAllNews[]>([]);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
+  const navigation =
+    useNavigation<NavigationProp<Record<string, object | undefined>>>();
 
   const loadMore = async () => {
-    if (loadingMore) return;
+    if (loadingMore || loading) return;
+
     setLoadingMore(true);
-    const nextPage = page + 1;
-    const newData = await getAllNews(nextPage);
-    setTopNews((prev) => [...prev, ...newData]);
-    setPage(nextPage);
+
+    try {
+      const nextPage = page + 1;
+
+      const newData = await getAllNews(nextPage);
+
+      if (newData?.length > 0) {
+        setTopNews((prev) => [...prev, ...newData]);
+        setPage(nextPage);
+      }
+    } catch (error) {
+      console.log("Load More Error", error);
+    }
+
     setLoadingMore(false);
   };
 
@@ -38,37 +59,47 @@ export default function AllNews() {
     setLoading(false);
   };
 
+  function goToArticleDetails(item: TypeAllNews) {
+    navigation.navigate(ScreenNums.ArticleDetails);
+  }
+
   function topNewsCard(item: TypeAllNews) {
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          source={{
-            uri: item.urlToImage,
-          }}
-          style={styles.imageNews}
-        />
-        <View>
-          <Text style={styles.titleNews} numberOfLines={2} ellipsizeMode="tail">
-            {item.title}
-          </Text>
-          <Text
-            style={styles.descriptionNews}
-            numberOfLines={3}
-            ellipsizeMode="tail"
-          >
-            {item.description}
-          </Text>
-          <View style={styles.containerAuthor}>
+      <TouchableOpacity onPress={() => goToArticleDetails(item)}>
+        <View style={styles.container}>
+          <ImageBackground
+            source={{
+              uri: item.urlToImage,
+            }}
+            style={styles.imageNews}
+          />
+          <View>
             <Text
-              style={styles.authorNews}
-              numberOfLines={1}
+              style={styles.titleNews}
+              numberOfLines={2}
               ellipsizeMode="tail"
             >
-              {item.author}
+              {item.title}
             </Text>
+            <Text
+              style={styles.descriptionNews}
+              numberOfLines={3}
+              ellipsizeMode="tail"
+            >
+              {item.description}
+            </Text>
+            <View style={styles.containerAuthor}>
+              <Text
+                style={styles.authorNews}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {item.author}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 

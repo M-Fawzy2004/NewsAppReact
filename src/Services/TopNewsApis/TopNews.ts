@@ -2,7 +2,7 @@ import axios from "axios";
 import { Articles } from "../../components/MainNews/TypeData";
 
 export async function getTopNews(page: number = 1, pageSize: number = 7) {
-  const url = `https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=${pageSize}&apiKey=c2ef68fb9506471a81d09f6a94064ba7`;
+  const url = `https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=${pageSize}&apiKey=b8d7d17eb6f642a9a843afe4ca674cbe`;
 
   try {
     const response = await axios.get(url);

@@ -5,23 +5,28 @@ import {
   ImageBackground,
   FlatList,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import styles from "./Styles";
 import { Articles } from "./TypeData";
 import { LinearGradient } from "expo-linear-gradient";
 import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 import { getTopNews } from "../../Services/TopNewsApis/TopNews";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import ScreenNums from "../../navigation/ScreenNums";
 
 const MainNews = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [topNews, setTopNews] = useState<Articles[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigation =
+    useNavigation<NavigationProp<Record<string, object | undefined>>>();
 
   const { width } = Dimensions.get("window");
 
   async function fetchNews() {
     setLoading(true);
-    const news = await getTopNews(1,10);
+    const news = await getTopNews(1, 10);
     setTopNews(news);
     setLoading(false);
   }
@@ -44,22 +49,28 @@ const MainNews = () => {
     );
   }
 
+  function goToArticleDetails(article: Articles) {
+    navigation.navigate(ScreenNums.ArticleDetails);
+  }
+
   function mainNewsCard(item: Articles) {
     return (
-      <ImageBackground
-        source={{ uri: item.urlToImage }}
-        resizeMode="cover"
-        style={styles.container}
-      >
-        <View style={styles.smallContainer}>
-          <Text style={styles.textSmallContainer}>
-            {item.author || "Unknown Author"}
-          </Text>
-        </View>
-        <View style={styles.mediumContainer}>
-          <Text style={styles.textMediumContainer}>{item.title}</Text>
-        </View>
-      </ImageBackground>
+      <TouchableOpacity onPress={() => goToArticleDetails(item)}>
+        <ImageBackground
+          source={{ uri: item.urlToImage }}
+          resizeMode="cover"
+          style={styles.container}
+        >
+          <View style={styles.smallContainer}>
+            <Text style={styles.textSmallContainer}>
+              {item.author || "Unknown Author"}
+            </Text>
+          </View>
+          <View style={styles.mediumContainer}>
+            <Text style={styles.textMediumContainer}>{item.title}</Text>
+          </View>
+        </ImageBackground>
+      </TouchableOpacity>
     );
   }
 
