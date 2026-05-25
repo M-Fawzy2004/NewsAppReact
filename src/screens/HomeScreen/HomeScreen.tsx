@@ -1,13 +1,13 @@
 import React from "react";
-import { View, FlatList, SafeAreaView } from "react-native";
+import { View, FlatList } from "react-native";
 import MainNews from "../../components/MainNews/MainNews";
 import AllNews from "../../components/AllNews/AllNews";
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView>
+    <View style={{ flex: 1 }}>
       {listHomeScreen()}
-    </SafeAreaView>
+    </View>
   );
 };
 

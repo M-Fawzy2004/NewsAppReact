@@ -12,15 +12,13 @@ import { Article } from "../../types/Article";
 import { LinearGradient } from "expo-linear-gradient";
 import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 import { getTopNews } from "../../Services/TopNewsApis/TopNews";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
-import ScreenNums from "../../navigation/ScreenNums";
+import { useRouter } from "expo-router";
 
 const MainNews = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [topNews, setTopNews] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigation =
-    useNavigation<NavigationProp<Record<string, object | undefined>>>();
+  const router = useRouter();
 
   const { width } = Dimensions.get("window");
 
@@ -50,7 +48,7 @@ const MainNews = () => {
   }
 
   function goToArticleDetails(article: Article) {
-    navigation.navigate(ScreenNums.ArticleDetails, { article });
+    router.push({ pathname: "/article-details", params: { article: JSON.stringify(article) } });
   }
 
   function mainNewsCard(item: Article) {

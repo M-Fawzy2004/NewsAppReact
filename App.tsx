@@ -1,8 +1,7 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
-import StackNavigator from "./src/navigation/StackNavigator";
+import StackNavigator from "./src/app/_layout";
 
 export default function App() {
   return (

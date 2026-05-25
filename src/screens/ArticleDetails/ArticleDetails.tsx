@@ -7,16 +7,15 @@ import {
   Linking,
 } from "react-native";
 import React from "react";
-import ScreenNums from "../../navigation/ScreenNums";
-import { StackNavigatorParamList } from "../../navigation/StackNavigator";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { useLocalSearchParams } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./Styles";
 
+import { Article } from "../../types/Article";
+
 export default function ArticleDetails() {
-  const route =
-    useRoute<RouteProp<StackNavigatorParamList, ScreenNums.ArticleDetails>>();
-  const { article } = route.params;
+  const { article: articleRaw } = useLocalSearchParams<{ article: string }>();
+  const article: Article = JSON.parse(articleRaw);
 
   const handleOpenLink = () => {
     if (article.url) {

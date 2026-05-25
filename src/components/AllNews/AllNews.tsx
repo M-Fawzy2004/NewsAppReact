@@ -4,9 +4,7 @@ import styles from "./Styles";
 import { Article } from "../../types/Article";
 import { RenderShimmer } from "./RanderShimmer";
 import { getAllNews } from "../../Services/AllNews/AllNews";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import ScreenNums from "../../navigation/ScreenNums";
-import { StackNavigatorParamList } from "../../navigation/StackNavigator";
+import { useRouter } from "expo-router";
 import NewsCard from "../NewsCard/NewsCard";
 
 export default function AllNews() {
@@ -14,10 +12,7 @@ export default function AllNews() {
   const [topNews, setTopNews] = useState<Article[]>([]);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const navigation =
-    useNavigation<
-      NavigationProp<StackNavigatorParamList, ScreenNums.HomeScreen>
-    >();
+  const router = useRouter();
 
   const loadMore = async () => {
     if (loadingMore || loading) return;
@@ -58,7 +53,7 @@ export default function AllNews() {
   };
 
   function goToArticleDetails(item: Article) {
-    navigation.navigate(ScreenNums.ArticleDetails, { article: item });
+    router.push({ pathname: "/article-details", params: { article: JSON.stringify(item) } });
   }
 
   function topNewsCard(item: Article) {
