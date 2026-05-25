@@ -1,12 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import ArticleDetails from "../screens/ArticleDetails/ArticleDetails";
 import ScreenNums from "./ScreenNums";
+import { Article } from "../types/Article";
 
-const stack = createNativeStackNavigator();
+const stack = createNativeStackNavigator<StackNavigatorParamList>();
 
 export default function StackNavigator() {
   return (
@@ -19,3 +18,8 @@ export default function StackNavigator() {
     </stack.Navigator>
   );
 }
+
+export type StackNavigatorParamList = {
+  [ScreenNums.HomeScreen]: undefined;
+  [ScreenNums.ArticleDetails]: { article: Article };
+};

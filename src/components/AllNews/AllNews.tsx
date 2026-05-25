@@ -1,25 +1,23 @@
-import {
-  View,
-  Text,
-  ImageBackground,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import styles from "./Styles";
-import { TypeAllNews } from "./TypeAllNews";
+import { Article } from "../../types/Article";
 import { RenderShimmer } from "./RanderShimmer";
 import { getAllNews } from "../../Services/AllNews/AllNews";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import ScreenNums from "../../navigation/ScreenNums";
+import { StackNavigatorParamList } from "../../navigation/StackNavigator";
+import NewsCard from "../NewsCard/NewsCard";
 
 export default function AllNews() {
   const [loading, setLoading] = useState(true);
-  const [topNews, setTopNews] = useState<TypeAllNews[]>([]);
+  const [topNews, setTopNews] = useState<Article[]>([]);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
   const navigation =
-    useNavigation<NavigationProp<Record<string, object | undefined>>>();
+    useNavigation<
+      NavigationProp<StackNavigatorParamList, ScreenNums.HomeScreen>
+    >();
 
   const loadMore = async () => {
     if (loadingMore || loading) return;
@@ -59,48 +57,12 @@ export default function AllNews() {
     setLoading(false);
   };
 
-  function goToArticleDetails(item: TypeAllNews) {
-    navigation.navigate(ScreenNums.ArticleDetails);
+  function goToArticleDetails(item: Article) {
+    navigation.navigate(ScreenNums.ArticleDetails, { article: item });
   }
 
-  function topNewsCard(item: TypeAllNews) {
-    return (
-      <TouchableOpacity onPress={() => goToArticleDetails(item)}>
-        <View style={styles.container}>
-          <ImageBackground
-            source={{
-              uri: item.urlToImage,
-            }}
-            style={styles.imageNews}
-          />
-          <View>
-            <Text
-              style={styles.titleNews}
-              numberOfLines={2}
-              ellipsizeMode="tail"
-            >
-              {item.title}
-            </Text>
-            <Text
-              style={styles.descriptionNews}
-              numberOfLines={3}
-              ellipsizeMode="tail"
-            >
-              {item.description}
-            </Text>
-            <View style={styles.containerAuthor}>
-              <Text
-                style={styles.authorNews}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                {item.author}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
+  function topNewsCard(item: Article) {
+    return <NewsCard article={item} onPress={() => goToArticleDetails(item)} />;
   }
 
   return (

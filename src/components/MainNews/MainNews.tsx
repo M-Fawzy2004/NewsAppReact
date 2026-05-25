@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./Styles";
-import { Articles } from "./TypeData";
+import { Article } from "../../types/Article";
 import { LinearGradient } from "expo-linear-gradient";
 import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 import { getTopNews } from "../../Services/TopNewsApis/TopNews";
@@ -17,7 +17,7 @@ import ScreenNums from "../../navigation/ScreenNums";
 
 const MainNews = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [topNews, setTopNews] = useState<Articles[]>([]);
+  const [topNews, setTopNews] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const navigation =
     useNavigation<NavigationProp<Record<string, object | undefined>>>();
@@ -49,11 +49,11 @@ const MainNews = () => {
     );
   }
 
-  function goToArticleDetails(article: Articles) {
-    navigation.navigate(ScreenNums.ArticleDetails);
+  function goToArticleDetails(article: Article) {
+    navigation.navigate(ScreenNums.ArticleDetails, { article });
   }
 
-  function mainNewsCard(item: Articles) {
+  function mainNewsCard(item: Article) {
     return (
       <TouchableOpacity onPress={() => goToArticleDetails(item)}>
         <ImageBackground

@@ -1,6 +1,3 @@
-export type TypeAllNews = {
-  urlToImage: string;
-  author: string;
-  title: string;
-  description: string;
-};
+import { Article } from "../../types/Article";
+
+export type TypeAllNews = Article;

@@ -1,5 +1,3 @@
-export type Articles = {
-  author: string;
-  title: string;
-  urlToImage: string;
-};
+import { Article } from "../../types/Article";
+
+export type Articles = Article;
