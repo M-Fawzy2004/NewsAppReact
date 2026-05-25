@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 20,
     overflow: "hidden",
-    height: 280,
+    height: 250,
     width: width - 24,
   },
   containerShimmer: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     borderRadius: 20,
     overflow: "hidden",
-    height: 280,
+    height: 250,
     width: width - 24,
   },
   gradient: {

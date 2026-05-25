@@ -1,16 +1,11 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Header from "../../components/Header/Header";
+import { View, FlatList, SafeAreaView } from "react-native";
 import MainNews from "../../components/MainNews/MainNews";
-import { View, FlatList } from "react-native";
 import AllNews from "../../components/AllNews/AllNews";
 
 const HomeScreen = () => {
   return (
     <SafeAreaView>
-      <View>
-        <Header />
-      </View>
       {listHomeScreen()}
     </SafeAreaView>
   );

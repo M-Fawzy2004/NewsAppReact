@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   imageNews: {
     width: "100%",
-    height: 380,
+    height: 400,
     resizeMode: "cover",
     borderRadius: 25,
     overflow: "hidden",
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   infoCard: {
     flex: 3,
     backgroundColor: "#ffffff",
-    borderRadius: 20,
+    borderRadius: 35,
     padding: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333333",
     marginBottom: 12,
-    marginTop: 16,
+    marginTop: 10,
   },
   descriptionNews: {
     fontSize: 16,
@@ -62,19 +62,21 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "justify",
   },
-  contentSection: {
-    marginTop: 24,
-  },
   contentText: {
     fontSize: 15,
     color: "#555555",
     lineHeight: 22,
     textAlign: "justify",
   },
+  divider: {
+    height: 1,
+    backgroundColor: "#e0e0e0",
+    marginVertical: 24,
+  },
   linkButton: {
     backgroundColor: "#1a1a2e",
-    borderRadius: 16,
-    paddingVertical: 14,
+    borderRadius: 35,
+    paddingVertical: 17,
     paddingHorizontal: 16,
     alignItems: "center",
     marginTop: 24,
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   linkButtonText: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#ffffff",
   },
@@ -94,23 +96,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginHorizontal: 8,
     marginBottom: 8,
-  },
-  fabHeart: {
-    position: "absolute",
-    bottom: 16,
-    right: 16,
-    zIndex: 10,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#ffffff",
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4,
   },
 });
 

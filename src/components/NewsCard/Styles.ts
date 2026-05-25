@@ -97,8 +97,9 @@ const styles = StyleSheet.create({
   },
   readMoreButton: {
     backgroundColor: "#1a1a2e",
-    borderRadius: 14,
-    paddingVertical: 12,
+    borderRadius: 35,
+    paddingVertical: 17,
+    paddingHorizontal: 16,
     alignItems: "center",
     shadowColor: "#1a1a2e",
     shadowOffset: { width: 0, height: 4 },
