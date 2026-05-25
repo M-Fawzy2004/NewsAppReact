@@ -54,21 +54,39 @@ const MainNews = () => {
   }
 
   function mainNewsCard(item: Article) {
+    const formattedDate = new Date(item.publishedAt).toLocaleDateString(
+      "en-US",
+      { month: "short", day: "numeric", year: "numeric" },
+    );
+
     return (
-      <TouchableOpacity onPress={() => goToArticleDetails(item)}>
+      <TouchableOpacity
+        activeOpacity={0.9}
+        onPress={() => goToArticleDetails(item)}
+      >
         <ImageBackground
           source={{ uri: item.urlToImage }}
           resizeMode="cover"
           style={styles.container}
         >
-          <View style={styles.smallContainer}>
-            <Text style={styles.textSmallContainer}>
-              {item.author || "Unknown Author"}
-            </Text>
-          </View>
-          <View style={styles.mediumContainer}>
-            <Text style={styles.textMediumContainer}>{item.title}</Text>
-          </View>
+          <LinearGradient
+            colors={["rgba(0,0,0,0.1)", "rgba(0,0,0,0.85)"]}
+            style={styles.gradient}
+          >
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>
+                {item.source?.name || "News"}
+              </Text>
+            </View>
+            <View style={styles.bottomSection}>
+              <Text style={styles.title}>{item.title}</Text>
+              <View style={styles.metaRow}>
+                <Text style={styles.metaText}>{item.author || "Unknown"}</Text>
+                <Text style={styles.metaDot}>•</Text>
+                <Text style={styles.metaText}>{formattedDate}</Text>
+              </View>
+            </View>
+          </LinearGradient>
         </ImageBackground>
       </TouchableOpacity>
     );

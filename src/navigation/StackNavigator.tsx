@@ -14,6 +14,11 @@ export default function StackNavigator() {
       <stack.Screen
         name={ScreenNums.ArticleDetails}
         component={ArticleDetails}
+        options={{
+          headerShown: true,
+          headerTransparent: true,
+          title: "",
+        }}
       />
     </stack.Navigator>
   );
